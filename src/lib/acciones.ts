@@ -106,3 +106,81 @@ export async function enviarRecordatorioPendiente(
 
   revalidatePath(`/proyectos/${proyectoId}`);
 }
+export async function actualizarProyecto(proyectoId: string, formData: FormData) {
+  const fecha_proximo_seguimiento = formData.get("fecha_proximo_seguimiento") as string;
+  const responsable_interno = formData.get("responsable_interno") as string;
+  const estado_pago = formData.get("estado_pago") as string;
+  const dependencia = formData.get("dependencia") as string;
+  const estado_permiso = formData.get("estado_permiso") as string;
+  const notas_internas = formData.get("notas_internas") as string;
+  const link_documentos = formData.get("link_documentos") as string;
+  const tipo_proyecto = formData.get("tipo_proyecto") as string;
+
+  const { error } = await supabase
+    .from("proyectos")
+    .update({
+      fecha_proximo_seguimiento: fecha_proximo_seguimiento || null,
+      responsable_interno: responsable_interno || null,
+      estado_pago: estado_pago || null,
+      dependencia: dependencia || null,
+      estado_permiso: estado_permiso || null,
+      notas_internas: notas_internas || null,
+      link_documentos: link_documentos || null,
+      tipo_proyecto: formData.get("tipo_proyecto") as string || null,
+      updated_at: new Date().toISOString(),
+
+    })
+    .eq("id", proyectoId);
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath(`/proyectos/${proyectoId}`);
+  revalidatePath("/");
+}
+export async function crearPendiente(proyectoId: string, formData: FormData) {
+  const descripcion = formData.get("descripcion") as string;
+  const tipo = formData.get("tipo") as string;
+  const responsable = formData.get("responsable") as string;
+  const fecha_limite = formData.get("fecha_limite") as string;
+
+  const { error } = await supabase.from("pendientes").insert({
+    proyecto_id: proyectoId,
+    descripcion,
+    tipo,
+    responsable,
+    fecha_limite: fecha_limite || null,
+    estado: "Pendiente",
+  });
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath(`/proyectos/${proyectoId}`);
+  revalidatePath("/");
+}
+export async function eliminarPendiente(pendienteId: string, proyectoId: string) {
+  const { error } = await supabase
+    .from("pendientes")
+    .delete()
+    .eq("id", pendienteId);
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath(`/proyectos/${proyectoId}`);
+  revalidatePath("/");
+}
+export async function alternarPendiente(pendienteId: string, proyectoId: string, estadoActual: string) {
+  const nuevoEstado = estadoActual === "Completado" ? "Pendiente" : "Completado";
+
+  const { error } = await supabase
+    .from("pendientes")
+    .update({
+      estado: nuevoEstado,
+      fecha_completado: nuevoEstado === "Completado" ? new Date().toISOString() : null,
+    })
+    .eq("id", pendienteId);
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath(`/proyectos/${proyectoId}`);
+  revalidatePath("/");
+}
