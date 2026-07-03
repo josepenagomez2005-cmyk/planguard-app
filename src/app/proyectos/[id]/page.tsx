@@ -25,8 +25,8 @@ export default async function ProyectoDetalle({
     return (
       <main className="p-8">
         <p className="text-gray-600">Proyecto no encontrado</p>
-        <Link href="/" className="text-blue-600 underline">
-          Volver al dashboard
+        <Link href="/dashboard" className="text-blue-600 underline">
+          Volver 
         </Link>
       </main>
     );
@@ -39,10 +39,10 @@ export default async function ProyectoDetalle({
   return (
     <main className="p-6 max-w-5xl mx-auto">
       <Link
-        href="/"
+        href="/dashboard"
         className="text-blue-600 hover:text-blue-800 flex items-center gap-1 mb-6 font-medium"
       >
-        <ArrowLeft size={16} /> Volver al dashboard
+        <ArrowLeft size={16} /> Volver 
       </Link>
 
       {/* Encabezado del proyecto */}

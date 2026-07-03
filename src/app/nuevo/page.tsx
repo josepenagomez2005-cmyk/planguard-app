@@ -12,7 +12,7 @@ export default async function NuevoProyecto() {
   return (
     <main className="p-4 md:p-6 max-w-2xl mx-auto">
       <Link
-        href="/"
+        href="/dashboard"
         className="text-blue-600 hover:text-blue-800 flex items-center gap-1 mb-6 font-medium text-sm md:text-base"
       >
         <ArrowLeft size={16} /> Volver

@@ -68,7 +68,7 @@ export async function crearProyecto(formData: FormData) {
 
   if (error) throw new Error(error.message);
 
-  revalidatePath("/");
+  revalidatePath("/dashboard");
 }
 
 export async function eliminarProyecto(proyectoId: string) {
