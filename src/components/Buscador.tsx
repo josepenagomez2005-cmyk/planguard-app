@@ -6,7 +6,7 @@ export default function Buscador() {
       <input
         type="text"
         placeholder="Buscar proyecto..."
-        className="border rounded px-3 py-1 text-sm w-full md:w-64"
+        className="border border-gray-300 rounded-lg px-3 py-1.5 text-sm w-full md:w-64 focus:ring-2 focus:ring-blue-500"
         onChange={(e) => {
           const filtro = e.target.value.toLowerCase();
           document.querySelectorAll("#tabla-proyectos tbody tr").forEach((row: any) => {

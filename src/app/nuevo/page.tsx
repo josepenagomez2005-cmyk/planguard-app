@@ -10,16 +10,16 @@ export default async function NuevoProyecto() {
     .order("nombre");
 
   return (
-    <main className="p-6 max-w-2xl mx-auto">
+    <main className="p-4 md:p-6 max-w-2xl mx-auto">
       <Link
         href="/"
-        className="text-blue-600 hover:underline flex items-center gap-1 mb-6"
+        className="text-blue-600 hover:text-blue-800 flex items-center gap-1 mb-6 font-medium text-sm md:text-base"
       >
         <ArrowLeft size={16} /> Volver
       </Link>
 
-      <div className="bg-white rounded-xl shadow p-6">
-        <h1 className="text-2xl font-bold mb-6">Nuevo Proyecto</h1>
+      <div className="bg-white rounded-xl shadow p-4 md:p-6">
+        <h1 className="text-xl md:text-2xl font-bold mb-6">Nuevo Proyecto</h1>
 
         <form action={crearProyecto} className="space-y-4">
           <div>
@@ -29,7 +29,7 @@ export default async function NuevoProyecto() {
             <input
               name="nombre"
               required
-              className="border rounded px-3 py-2 w-full text-sm"
+              className="border border-gray-300 rounded-lg px-3 py-2 w-full text-sm focus:ring-2 focus:ring-blue-500"
               placeholder="Ej: 4151 McGirts Blvd"
             />
           </div>
@@ -40,7 +40,7 @@ export default async function NuevoProyecto() {
             </label>
             <select
               name="cliente_id"
-              className="border rounded px-3 py-2 w-full text-sm"
+              className="border border-gray-300 rounded-lg px-3 py-2 w-full text-sm focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Seleccionar cliente...</option>
               {clientes?.map((c) => (
@@ -57,7 +57,7 @@ export default async function NuevoProyecto() {
             </label>
             <input
               name="direccion_propiedad"
-              className="border rounded px-3 py-2 w-full text-sm"
+              className="border border-gray-300 rounded-lg px-3 py-2 w-full text-sm focus:ring-2 focus:ring-blue-500"
               placeholder="Ej: 123 Main St, Jacksonville, FL"
             />
           </div>
@@ -69,7 +69,7 @@ export default async function NuevoProyecto() {
             <select
               name="tipo_proyecto"
               required
-              className="border rounded px-3 py-2 w-full text-sm"
+              className="border border-gray-300 rounded-lg px-3 py-2 w-full text-sm focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Seleccionar tipo...</option>
               <option value="Planos de remodelación">Planos de remodelación</option>
@@ -87,14 +87,14 @@ export default async function NuevoProyecto() {
             </label>
             <input
               name="responsable_interno"
-              className="border rounded px-3 py-2 w-full text-sm"
+              className="border border-gray-300 rounded-lg px-3 py-2 w-full text-sm focus:ring-2 focus:ring-blue-500"
               placeholder="Ej: Ana"
             />
           </div>
 
           <button
             type="submit"
-            className="bg-blue-600 text-white px-6 py-2 rounded text-sm hover:bg-blue-700 w-full"
+            className="bg-slate-700 text-white px-6 py-2.5 rounded-lg text-sm hover:bg-slate-800 w-full transition font-medium"
           >
             Crear proyecto
           </button>

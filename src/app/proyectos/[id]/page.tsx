@@ -46,26 +46,11 @@ export default async function ProyectoDetalle({
       </Link>
 
       {/* Encabezado del proyecto */}
-      <div className={`rounded-2xl shadow-lg p-6 mb-6 ${isAtrasado ? "bg-gradient-to-r from-red-500 to-red-600" : "bg-gradient-to-r from-blue-600 to-blue-700"}`}>
+      <div className={`rounded-2xl shadow-lg p-6 mb-4 ${isAtrasado ? "bg-gradient-to-r from-red-500 to-red-600" : "bg-gradient-to-r from-blue-600 to-blue-700"}`}>
         <div className="flex justify-between items-start">
           <div className="text-white">
             <h1 className="text-2xl font-bold">{proyecto.nombre}</h1>
             <p className="text-white/80 text-sm mt-1">{proyecto.direccion_propiedad}</p>
-            <form
-              action={async () => {
-                "use server";
-                const { eliminarProyecto } = await import("@/lib/acciones");
-                await eliminarProyecto(id);
-              }}
-              className="mt-3"
-            >
-              <button
-                type="submit"
-                className="text-xs text-white/60 hover:text-white underline"
-              >
-                Eliminar proyecto
-              </button>
-            </form>
           </div>
           <span className={`px-4 py-1.5 rounded-full text-sm font-bold shadow ${isAtrasado ? "bg-white text-red-600" : "bg-white text-blue-600"}`}>
             {isAtrasado ? "⚠ Atrasado" : "✓ Al día"}
@@ -90,6 +75,25 @@ export default async function ProyectoDetalle({
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Botón eliminar proyecto */}
+      <div className="flex justify-end mb-4">
+        <form
+          action={async () => {
+            "use server";
+            const { eliminarProyecto } = await import("@/lib/acciones");
+            await eliminarProyecto(id);
+          }}
+        >
+          <button
+            type="submit"
+            className="bg-white border border-gray-300 text-gray-500 hover:text-red-600 hover:border-red-300 hover:bg-red-50 text-xs px-4 py-2 rounded-xl transition flex items-center gap-1.5 shadow-sm"
+            title="Eliminar proyecto"
+          >
+            <span>🗑</span> Eliminar proyecto
+          </button>
+        </form>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
